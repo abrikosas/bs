@@ -14,16 +14,6 @@ import org.w3c.dom.Node
 import org.w3c.dom.NodeList
 import org.xml.sax.SAXException
 
-
-/**
-  * * @param args(0)        - port
-  * * @param args(1)        - host
-  * * @param args(2)        - window size
-  * * @param args(3)        - mapreduce output
-  */
-
-
-
 //https://forums.databricks.com/questions/2798/how-to-write-to-kafka-from-streaming-application.html
 
 object FromSocketToKafka extends Serializable {
