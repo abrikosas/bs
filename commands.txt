@@ -1,0 +1,84 @@
+tail -f /tmp/test | nc -lk 4445
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic test
+
+cat t >> /tmp/test
+
+{
+  'events':[
+     {
+    'name':"whitePosition",
+    'x':100,
+    'y':50,
+	'gameId':1
+      },
+   {
+    'name':"whiteStartedMoving",
+    'time':"2016-01-05 13:00",
+	'gameId':1
+      },
+	  {
+    'name':"whiteStartPosition",
+    'time':"2016-01-05 13:00"
+	'gameId':1
+      },
+    {
+    'name':"whiteStoped",
+    'time':"2016-01-05 13:00",
+    'x':100,
+    'y':50,
+	'gameId':1
+      },
+    {
+    'name':"whiteWallCollision",
+    'time':"2016-01-05 13:00",
+    'x':100,
+    'y':50,
+	'gameId':1
+      },
+    {
+    'name':"whiteBallCollision",
+    'time':"2016-01-05 13:00",
+    'ballId':1,
+    'x':100,
+    'y':50,
+	'gameId':1
+      },
+    {
+    'name':"ballStartPosition",
+    'ballId':1,
+    'x':100,
+    'y':50,
+	'gameId':1
+      },
+      {
+    'name':"ballInTheHole",
+    'time':"2016-01-05 13:00",
+    'ballId':1,
+    'holeId':1,
+	'gameId':1
+      },
+      {
+    'name':"gameEnd",
+    'time':"2016-01-05 13:00",
+	'gameId':1
+      },
+       {
+    'name':"gameStart",
+    'time':"2016-01-05 13:00",
+	'gameId':1
+      },
+	  {
+	 'name':"combinationStart",
+    'time':"2016-01-05 13:00",
+	'combinationId':1,
+	'gameId':1
+	  },
+	   {
+	   'name':"combinationEnd",
+    'time':"2016-01-05 13:00",
+	'combinationId':1,
+	'gameId':1
+	  }
+ ]
+}
