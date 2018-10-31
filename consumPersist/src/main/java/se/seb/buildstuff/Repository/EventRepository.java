@@ -7,7 +7,5 @@ import se.seb.buildstuff.Domain.Event;
 
 public interface EventRepository extends CrudRepository<Event, Long> {
 
-
-
 }
 

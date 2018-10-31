@@ -10,11 +10,9 @@ import org.springframework.stereotype.Component;
 import se.seb.buildstuff.Domain.Event;
 import se.seb.buildstuff.Service.EventService;
 
-import org.apache.commons.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-import java.util.stream.Stream;
 
 @Component
 public class KafkaReceiver {

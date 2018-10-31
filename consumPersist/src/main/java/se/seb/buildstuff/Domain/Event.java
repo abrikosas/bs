@@ -15,13 +15,13 @@ import javax.persistence.Id;
 public class Event {
     @Id
     @GeneratedValue( strategy = GenerationType.AUTO )
-    private Long id;
-    private Long gameId;
+    private Integer id;
+    private Integer gameId;
     private String name;
-    private Long x;
-    private Long y;
-    private Long ballId;
-    private Long holeId;
+    private Integer x;
+    private Integer y;
+    private Integer ballId;
+    private Integer holeId;
     private String time;
     private String combinationId;
 
