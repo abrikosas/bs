@@ -1,8 +1,7 @@
 # bs
 # Introduction
 
-
-
+Hardware which is tracking movement of the white billiard ball writing coordinates and other information to JSON file. Latest changes of the file are written to the socket. Scala program reads data from socket by using spark streaming library and writes to kafka topic. Next step is Spring boot program which alows easy consume from Kafka , parsing JSON and writing data to Maria DB . Information from the database is used for rendering white ball trajectory on the screen .
 
 
 Prerequisits: mvn,spark-submit, java 1.8
