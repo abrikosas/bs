@@ -18,7 +18,7 @@ tail -f /tmp/test | nc -lk 4445
 
 2. start read from socket and write to kafka: 
 ```
-spark-submit --class FromSocketToKafka bs/socketToKafka/target/billiardstream-1.0-SNAPSHOT-jar-with-dependencies.jar
+spark-submit --class FromSocketToKafka bs/socketToKafka/target/billiardstream-1.0-SNAPSHOT-jar-with-dependencies.jar kafkaTopic streaminghost port
 ```
 
 3. start persisting from kafka to relational DB: 
