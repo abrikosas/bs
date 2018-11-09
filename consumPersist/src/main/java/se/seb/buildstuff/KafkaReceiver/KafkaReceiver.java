@@ -12,6 +12,10 @@ import se.seb.buildstuff.Service.EventService;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -32,9 +36,12 @@ public class KafkaReceiver {
         InputStream sk = IOUtils.toInputStream(consumerRecord.value().toString(),"UTF-8");
 
 			try {
+                String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date());
+
+                Files.write(Paths.get("event"+timeStamp+".json"), consumerRecord.value().toString().getBytes());
 
 
-				List<Event> events = mapper.readValue(sk,typeReference);
+                List<Event> events = mapper.readValue(sk,typeReference);
 				eventService.save(events);
 				//eventService.insert(events);
 				System.out.println("Events Saved!");
