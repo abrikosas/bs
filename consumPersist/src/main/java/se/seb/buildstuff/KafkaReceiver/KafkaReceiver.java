@@ -19,7 +19,7 @@ public class KafkaReceiver {
     @Autowired
     EventService eventService;
 
-    @KafkaListener(topics = "test")
+    @KafkaListener(topics = "${app.topic.name}")
     public  void receiveTopic1(ConsumerRecord<?, ?> consumerRecord) throws IOException{
         System.out.println(consumerRecord.value());
 

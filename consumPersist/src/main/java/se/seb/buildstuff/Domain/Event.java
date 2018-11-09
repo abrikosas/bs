@@ -26,7 +26,7 @@ public class Event {
     private String combinationId;
 
     private String events;
-
+    private String status;
 
 
 
