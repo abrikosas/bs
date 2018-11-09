@@ -18,8 +18,8 @@ public class Event {
     private Integer id;
     private Integer gameId;
     private String name;
-    private Integer x;
-    private Integer y;
+    private Double x;
+    private Double y;
     private Integer ballId;
     private Integer holeId;
     private String time;
