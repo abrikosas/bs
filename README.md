@@ -23,5 +23,5 @@ spark-submit --class FromSocketToKafka bs/socketToKafka/target/billiardstream-1.
 
 3. start persisting from kafka to relational DB: 
 ```
-java -jar buildstuff-0.0.1-SNAPSHOT.jar
+java -jar buildstuff-0.0.1-SNAPSHOT.jar --spring.config.location=application.properties
 ```
