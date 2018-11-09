@@ -16,17 +16,30 @@ import org.xml.sax.SAXException
 
 //https://forums.databricks.com/questions/2798/how-to-write-to-kafka-from-streaming-application.html
 
+
+/**
+  * * @param args(0)        - kafka topic
+  * * @param args(1)        - host which is streaming
+  * * @param args(2)        - hbase table name
+  */
+
+
 object FromSocketToKafka extends Serializable {
 
 
   def main(args: Array[String]): Unit = {
+
+
+    val topicName = args(0)
+    val host = args(1)
+    val port = args(2).toInt
 
     val conf: SparkConf = new SparkConf().setAppName("Biliardas").setMaster("local[4]")
     val sc = new SparkContext(conf)
 
     val ssc = new StreamingContext(sc, Seconds(2))
 
-    val lines = ssc.socketTextStream("127.0.0.1", 4445)
+    val lines = ssc.socketTextStream(host, port)
 
     lines.foreachRDD( rdd => {
       rdd.foreachPartition( partition => {
