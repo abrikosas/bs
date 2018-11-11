@@ -22,11 +22,11 @@ public class Event {
     private Double y;
     private Integer ballId;
     private Integer holeId;
-    private String time;
+    private Integer time;
     private String combinationId;
 
     private String events;
-    private String status;
+    private Integer status;
 
 
 
