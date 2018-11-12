@@ -43,7 +43,7 @@ cd $DIRECTORY
 if [ "{$SPARK_SERVICE:-null}" = null ]; then
 	echo "starting spark-submit ......."
 	nohup /usr/local/spark/bin/spark-submit --class FromSocketToKafka socketToKafka/target/billiardstream-1.0-SNAPSHOT-jar-with-dependencies.jar $TOPIC $STREAM_HOST $STREAM_PORT > $LOGS_DIRECTORY/stream_$DATE.log 2>&1 &
-#else 
+else 
 	echo "spark-submit already running , please kill existing processes and re-run this script"
 	exit 1
 fi
