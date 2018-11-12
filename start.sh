@@ -21,6 +21,7 @@ DATE=`date "+%Y-%m-%d-%H_%M_%S"`
 
 
 SPARK_SERVICE=`ps -ef | grep spark | grep -v grep`
+SPRING_SERVICE=`ps -ef | grep FromSocketToKafka| grep -v grep`
 
 if [ ! -d "$DIRECTORY" ]; then
     echo "directory $DIRECTORY doesn't exists"
@@ -52,7 +53,11 @@ echo "sleeping 15 seconds"
 sleep 15s
 
 echo "starting Spring boot application"
-
-nohup /usr/bin/java -jar consumPersist/target/buildstuff-0.0.1-SNAPSHOT.jar --spring.config.location=application.properties > $LOGS_DIRECTORY/persist_$DATE.log 2>&1 &
-
+if [ "{$SPRING_SERVICE:-null}" = null ]; then
+	echo "Starting Spring application"
+	nohup /usr/bin/java -jar consumPersist/target/buildstuff-0.0.1-SNAPSHOT.jar --spring.config.location=application.properties > $LOGS_DIRECTORY/persist_$DATE.log 2>&1 &
+else
+	echo "spring application already running, plese kill existing processes and re-run this script"
+	exit 1
+fi
 echo "The end all programs started. Bye bye."
