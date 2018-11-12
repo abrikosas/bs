@@ -24,11 +24,7 @@ public class Event {
     private Integer holeId;
     private Integer time;
     private String combinationId;
-
-    private String events;
     private Integer status;
-
-
 
     public Event() {}
 }
