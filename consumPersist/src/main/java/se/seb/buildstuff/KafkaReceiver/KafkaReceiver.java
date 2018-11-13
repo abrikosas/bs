@@ -38,7 +38,7 @@ public class KafkaReceiver {
 			try {
                 String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date());
 
-                Files.write(Paths.get("event"+timeStamp+".json"), consumerRecord.value().toString().getBytes());
+                //Files.write(Paths.get("event"+timeStamp+".json"), consumerRecord.value().toString().getBytes());
 
 
                 List<Event> events = mapper.readValue(sk,typeReference);
