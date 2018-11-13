@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env bash 
 
 # Title:         start stream and persist to Kafka & MariaDB
 # Description:   one java program reads from socket and writes to kafka. Another one reads from Kafka and writes to Mariadb. 
@@ -20,8 +20,8 @@ DATE=`date "+%Y-%m-%d-%H_%M_%S"`
 
 
 
-SPARK_SERVICE=`ps -ef | grep spark | grep -v grep`
-SPRING_SERVICE=`ps -ef | grep FromSocketToKafka| grep -v grep`
+SPARK_SERVICE="FromSocketToKafka"
+SPRING_SERVICE="buildstuff"
 
 if [ ! -d "$DIRECTORY" ]; then
     echo "directory $DIRECTORY doesn't exists"
@@ -38,26 +38,19 @@ echo "changing directory to $DIRECTORY"
 cd $DIRECTORY
 
 
-
-
-
-if [ "{$SPARK_SERVICE:-null}" = null ]; then
-	echo "starting spark-submit ......."
-	nohup /usr/local/spark/bin/spark-submit --class FromSocketToKafka socketToKafka/target/billiardstream-1.0-SNAPSHOT-jar-with-dependencies.jar $TOPIC $STREAM_HOST $STREAM_PORT > $LOGS_DIRECTORY/stream_$DATE.log 2>&1 &
-else 
-	echo "spark-submit already running , please kill existing processes and re-run this script"
-	exit 1
-fi
-
-echo "sleeping 15 seconds"
-sleep 15s
-
-echo "starting Spring boot application"
-if [ "{$SPRING_SERVICE:-null}" = null ]; then
-	echo "Starting Spring application"
-	nohup /usr/bin/java -jar consumPersist/target/buildstuff-0.0.1-SNAPSHOT.jar --spring.config.location=application.properties > $LOGS_DIRECTORY/persist_$DATE.log 2>&1 &
+if ps ax | grep -v grep | grep $SPARK_SERVICE > /dev/null
+then
+    echo "$SPARK_SERVICE service running, everything is fine"
 else
-	echo "spring application already running, plese kill existing processes and re-run this script"
-	exit 1
+    echo "$SPARK_SERVICE is not running"
+        nohup /usr/local/spark/bin/spark-submit --class FromSocketToKafka socketToKafka/target/billiardstream-1.0-SNAPSHOT-jar-with-dependencies.jar $TOPIC $STREAM_HOST $STREAM_PORT > $LOGS_DIRECTORY/stream_$DATE.log 2>&1 &
 fi
-echo "The end all programs started. Bye bye."
+
+
+if ps ax | grep -v grep | grep $SPRING_SERVICE > /dev/null
+then
+	 echo "$SPRING_SERVICE service running, everything is fine"
+else 
+        echo "$SPRING_SERVICE is not running"
+	nohup /usr/bin/java -jar consumPersist/target/buildstuff-0.0.1-SNAPSHOT.jar --spring.config.location=application.properties > $LOGS_DIRECTORY/persist_$DATE.log 2>&1 &
+fi
