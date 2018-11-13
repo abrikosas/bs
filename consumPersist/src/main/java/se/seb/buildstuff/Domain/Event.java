@@ -23,7 +23,7 @@ public class Event {
     private Integer ballId;
     private Integer holeId;
     private Integer time;
-    private String combinationId;
+    private Integer combinationId;
     private Integer status;
 
     public Event() {}
