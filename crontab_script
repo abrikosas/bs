@@ -1,0 +1,8 @@
+#checking every 15 seconds if mysql_check service is running
+#mysql_check - checks wheather a new ID was inserted into MySQL DB
+#if new ID appears - a label is printed with that ID.
+* * * * * for i in 0 1 2 3; do ( cd /opt/other/ && ./ps_mysql_service_validator.sh >> /opt/other/ps_mysql_service_validator.log ) & sleep 15; done;
+
+
+#checking every 3 seconds if streaming and persisting service are running
+* * * * * for i in `seq 0 19`; do ( cd /opt/streaming/bs && ./start.sh >> /opt/streaming/LOGS/service_check.log 2>&1 ) & sleep 3;done
